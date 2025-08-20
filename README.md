@@ -1,6 +1,7 @@
 # Django Calculator Project
 
 This is a simple **Django-based calculator web application**. It demonstrates basic CRUD functionality, templates, static files handling, and deployment-ready settings.
+
 live <https://django-app-m6nw.onrender.com/>
 ---
 
