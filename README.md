@@ -1,7 +1,7 @@
 # Django Calculator Project
 
 This is a simple **Django-based calculator web application**. It demonstrates basic CRUD functionality, templates, static files handling, and deployment-ready settings.
-
+live <https://django-app-m6nw.onrender.com/>
 ---
 
 ## Table of Contents
@@ -39,7 +39,7 @@ This is a simple **Django-based calculator web application**. It demonstrates ba
 1. **Clone the repository**:
 
 ```bash
-git clone <your-repo-url>
+git clone <(https://github.com/ankulmaurya88/Django-cal)>
 cd Django-cal
 Create a virtual environment and activate it:
 ```
@@ -106,12 +106,7 @@ Run python manage.py collectstatic to copy all static files to STATIC_ROOT for p
 License
 This project is licensed under the MIT License.
 
-yaml
-Copy
-Edit
+
 
 ---
 
-If you want, I can also create a **ready-to-use `requirements.txt` and `.gitignore`** tailored for this Django project so you can just run it without any errors.  
-
-Do you want me to do that?
