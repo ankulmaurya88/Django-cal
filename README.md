@@ -40,7 +40,7 @@ live <https://django-app-m6nw.onrender.com/>
 1. **Clone the repository**:
 
 ```bash
-git clone <(https://github.com/ankulmaurya88/Django-cal)>
+git clone < https://github.com/ankulmaurya88/Django-cal >
 cd Django-cal
 Create a virtual environment and activate it:
 ```
