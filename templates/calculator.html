@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background: #f4f4f9;
+            color: #333;
+        }
+        .calculator {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        input, select, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 1em;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Simple Calculator</h2>
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
+            <input type="number" step="any" name="num1" placeholder="Enter first number" required>
+            <input type="number" step="any" name="num2" placeholder="Enter second number" required>
+
+            <select name="operation">
+                {% for op in operations %}
+                    <!-- <option value="{{ op }}">{{ op|title }}</option> -->
+                    <option value="{{ op }}" {% if request.POST.operation == op %}selected{% endif %}>{{ op|title }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if result is not None %}
+        <div class="result">
+            <strong>Result:</strong> {{ result }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
