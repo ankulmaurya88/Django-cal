@@ -47,7 +47,7 @@ Create a virtual environment and activate it:
 python3 -m venv venv
 source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
-
+```
 Install dependencies:
 
 ``` bash
@@ -61,12 +61,10 @@ mkdir -p staticfiles
 Run migrations:
 
 ``` bash
-
 python3 manage.py migrate
 Collect static files:
 ```
 ```bash
-
 python3 manage.py collectstatic --noinput
 ```
 Run the development server:
@@ -76,7 +74,7 @@ Run the development server:
 python3 manage.py runserver
 ```
 ---
-
+``` bash 
 Django-cal/
 ├─ cal/                   # Main Django project folder
 │  ├─ settings.py
@@ -94,7 +92,8 @@ Django-cal/
 ├─ db.sqlite3             # Database file
 ├─ manage.py
 └─ requirements.txt
-----
+```
+
 Static Files
 STATIC_URL = '/static/'
 
