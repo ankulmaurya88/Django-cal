@@ -14,24 +14,24 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy setup.py and install the package
+# Copy setup.py and requirements
 COPY setup.py /app/
 COPY requirements.txt /app/
+
+# Install dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 RUN pip install -e .
 
-# Copy the full project
+# Copy project code
 COPY . /app/
 
-# Collect static files
-RUN python manage.py collectstatic --noinput
-
-# Apply database migrations
+# Apply migrations and collect static files
 RUN python manage.py migrate
+RUN python manage.py collectstatic --noinput
 
 # Expose port
 EXPOSE 8000
 
-# Start the Django application using gunicorn
+# Start the Django application
 CMD ["gunicorn", "cal.wsgi:application", "--bind", "0.0.0.0:8000"]
