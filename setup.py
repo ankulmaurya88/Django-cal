@@ -10,7 +10,7 @@ setup(
     include_package_data=True,             # Includes templates and static folders
     install_requires=[
         "Django==4.2",
-        "gunicorn==22.3.0",               # Production WSGI server
+        "gunicorn==23.0.0",      # Updated valid version
         "pytest-django==4.5.2"            # For testing
     ],
     entry_points={
