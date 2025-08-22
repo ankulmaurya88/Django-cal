@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -42,9 +42,9 @@
 
             <select name="operation">
                 {% for op in operations %}
-                    <!-- <option value="{{ op }}">{{ op|title }}</option> -->
-                    <option value="{{ op }}" {% if request.POST.operation == op %}selected{% endif %}>{{ op|title }}</option>
-                {% endfor %}
+                    <option value="{{ op }}">{{ op|title }}</option> -->
+                    <!-- <option value="{{ op }}" {% if request.POST.operation == op %}selected{% endif %}>{{ op|title }}</option> -->
+                <!-- {% endfor %}
             </select>
 
             <button type="submit">Calculate</button>
@@ -55,6 +55,67 @@
             <strong>Result:</strong> {{ result }}
         </div>
         {% endif %}
+    </div>
+</body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django Calculator</title>
+    <style>
+        body { font-family: Arial; text-align: center; width: 100%; margin-top: 50px; }
+        .calculator { display: inline-block; border: 2px solid #444; padding: 20px; border-radius: 10px; }
+        input[type=text] { width: 220px; height: 40px; font-size: 18px; text-align: right; margin-bottom: 10px; }
+        button { width: 50px; height: 50px; font-size: 18px; margin: 2px; }
+        .wide { width: 106px; }
+    </style>
+    <script>
+        function insert(val) {
+            document.getElementById("expression").value += val;
+        }
+        function clearInput() {
+            document.getElementById("expression").value = "";
+        }
+    </script>
+</head>
+<body>
+    <h2> Calculator</h2>
+    <div class="calculator">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" id="expression" name="expression" value="{{ expression }}" readonly><br>
+            <button type="button" onclick="insert('1')">1</button>
+            <button type="button" onclick="insert('2')">2</button>
+            <button type="button" onclick="insert('3')">3</button>
+            <button type="button" onclick="insert('+')">+</button><br>
+
+            <button type="button" onclick="insert('4')">4</button>
+            <button type="button" onclick="insert('5')">5</button>
+            <button type="button" onclick="insert('6')">6</button>
+            <button type="button" onclick="insert('-')">-</button><br>
+
+            <button type="button" onclick="insert('7')">7</button>
+            <button type="button" onclick="insert('8')">8</button>
+            <button type="button" onclick="insert('9')">9</button>
+            <button type="button" onclick="insert('*')">×</button><br>
+
+            <button type="button" onclick="insert('0')">0</button>
+            <button type="button" onclick="insert('.')">.</button>
+            <button type="button" onclick="insert('%')">%</button>
+            <button type="button" onclick="insert('/')">÷</button><br>
+
+            <!-- Advanced -->
+            <button type="button" onclick="insert('sqrt(')">√</button>
+            <button type="button" onclick="insert('pow(')">xʸ</button>
+            <button type="button" onclick="clearInput()">C</button>
+            <button type="submit">=</button>
+        </form>
+
+        <h3>Result: {{ result }}</h3>
     </div>
 </body>
 </html>

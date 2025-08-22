@@ -60,31 +60,67 @@
 
 
 
-from django.views.generic import TemplateView
+# from django.views.generic import TemplateView
 
-class CalculatorView(TemplateView):
-    template_name = 'calculator.html'
+# class CalculatorView(TemplateView):
+#     template_name = 'calculator.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['operations'] = ['add', 'subtract', 'multiply', 'divide']
-        context['result'] = None
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['operations'] = ['add', 'subtract', 'multiply', 'divide']
+#         context['result'] = None
+#         return context
 
-    def post(self, request, *args, **kwargs):
-        context = self.get_context_data()
-        num1 = float(request.POST.get('num1', 0))
-        num2 = float(request.POST.get('num2', 0))
-        operation = request.POST.get('operation', 'add')
+#     def post(self, request, *args, **kwargs):
+#         context = self.get_context_data()
+#         num1 = float(request.POST.get('num1', 0))
+#         num2 = float(request.POST.get('num2', 0))
+#         operation = request.POST.get('operation', 'add')
 
-        if operation == 'add':
-            result = num1 + num2
-        elif operation == 'subtract':
-            result = num1 - num2
-        elif operation == 'multiply':
-            result = num1 * num2
-        elif operation == 'divide':
-            result = num1 / num2 if num2 != 0 else 'Division by zero error'
+#         if operation == 'add':
+#             result = num1 + num2
+#         elif operation == 'subtract':
+#             result = num1 - num2
+#         elif operation == 'multiply':
+#             result = num1 * num2
+#         elif operation == 'divide':
+#             result = num1 / num2 if num2 != 0 else 'Division by zero error'
 
-        context['result'] = result
-        return self.render_to_response(context)
+
+
+#         context['result'] = result
+#         return self.render_to_response(context)
+    
+
+from django.views import View
+from django.shortcuts import render
+import math
+
+class CalculatorView(View):
+    template_name = "calculator.html"
+
+    def get(self, request):
+        """Handle GET requests - show empty calculator initially"""
+        return render(request, self.template_name, {"result": None, "expression": ""})
+
+    def post(self, request):
+        """Handle POST requests - process calculator expression"""
+        expression = request.POST.get("expression", "")
+        result = None
+        try:
+            # Safe evaluation with restricted functions
+            result = eval(expression, {"__builtins__": None}, {
+                "sqrt": math.sqrt,
+                "pow": pow,
+                "abs": abs,
+                "pi": math.pi,
+                "e": math.e,
+                "sin": math.sin,
+                "cos": math.cos,
+                "tan": math.tan,
+                "log": math.log
+            })
+        except Exception:
+            result = "Error"
+
+        return render(request, self.template_name, {"result": result, "expression": expression})
